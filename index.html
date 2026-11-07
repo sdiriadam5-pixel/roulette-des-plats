@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#f7f3ea">
+  <meta name="description" content="Une roulette gourmande pour choisir aléatoirement le plat du jour parmi 23 spécialités.">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Les saveurs">
+  <meta name="mobile-web-app-capable" content="yes">
+  <title>La roue des saveurs — Qu’est-ce qu’on mange ?</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-texture" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="La roue des saveurs, accueil">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" fill="none">
+          <path d="M10 5v8.5M7 5v5.5a3 3 0 0 0 6 0V5M10 13.5V27M21.5 5c-3 2.2-4.5 5.1-4.5 8.7 0 2.2 1.2 3.3 3.5 3.3V27M21.5 5v22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      <span class="brand-copy">
+        <span>LA ROUE</span>
+        <strong>des saveurs</strong>
+      </span>
+    </a>
+
+    <div class="topbar-note">
+      <span class="little-dot" aria-hidden="true"></span>
+      <span><strong>23 plats.</strong> Zéro prise de tête.</span>
+    </div>
+  </header>
+
+  <main class="main-container">
+    <section class="hero" aria-labelledby="page-title">
+      <div class="eyebrow"><span aria-hidden="true"></span> LE HASARD A BON GOÛT <span aria-hidden="true"></span></div>
+      <h1 id="page-title">Qu’est-ce qu’on mange <em>aujourd’hui&nbsp;?</em></h1>
+      <p>Un petit tour de roue, et le dîner est décidé.</p>
+    </section>
+
+    <section class="game-layout" aria-label="Roulette des plats">
+      <div class="wheel-panel" id="wheel-panel">
+        <div class="panel-topline">
+          <span class="status-pill" id="status-pill"><span></span><span id="status-text">La roue est prête</span></span>
+          <span class="dish-counter">23 plats dans la roue</span>
+        </div>
+
+        <div class="wheel-wrap" id="wheel-wrap">
+          <div class="wheel-pointer" aria-hidden="true">
+            <svg viewBox="0 0 56 72" fill="none">
+              <path d="M12 24 28 66 44 24" fill="#C9573B" stroke="#FFF9EE" stroke-width="5" stroke-linejoin="round"/>
+              <circle cx="28" cy="20" r="16" fill="#C9573B" stroke="#FFF9EE" stroke-width="5"/>
+              <circle cx="28" cy="20" r="5" fill="#FFF9EE"/>
+            </svg>
+          </div>
+
+          <canvas id="wheel" width="720" height="720" aria-label="Roue contenant les 23 plats"></canvas>
+
+          <button class="wheel-center" id="center-spin" type="button" aria-label="Faire tourner la roue">
+            <svg viewBox="0 0 44 44" fill="none" aria-hidden="true">
+              <path d="M14 7v13M10 7v8a4 4 0 0 0 8 0V7M14 20v17M30 7c-4.5 3-6.5 7-6.5 12 0 3 1.7 4.5 5 4.5V37M30 7v30" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>LANCER</span>
+          </button>
+
+          <div class="confetti" id="confetti" aria-hidden="true"></div>
+        </div>
+
+        <p class="wheel-hint"><span class="keyboard-hint"><kbd>Espace</kbd> pour tenter ta chance</span><span class="mobile-hint">Touche le centre pour lancer la roue</span></p>
+      </div>
+
+      <aside class="control-column">
+        <div class="result-card" id="result-card">
+          <div class="result-topline">
+            <span id="result-eyebrow">LE HASARD EST INVITÉ</span>
+            <svg class="sparkle" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+              <path d="M14 2c.7 7.2 4.8 11.3 12 12-7.2.7-11.3 4.8-12 12-.7-7.2-4.8-11.3-12-12 7.2-.7 11.3-4.8 12-12Z" fill="currentColor"/>
+            </svg>
+          </div>
+
+          <div class="result-content" id="result-content" aria-live="polite">
+            <div class="result-placeholder">
+              <div class="cloche-icon" aria-hidden="true">
+                <svg viewBox="0 0 64 64" fill="none">
+                  <path d="M10 43h44M14 43c0-13.3 8-23 18-23s18 9.7 18 23M32 20v-4M28 15h8M7 49h50" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M20 32c1.5-4 4.2-6.5 8-7.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <h2>On laisse le hasard<br>décider&nbsp;?</h2>
+              <p>Plus d’hésitation. Juste une bonne excuse pour passer à table.</p>
+            </div>
+          </div>
+
+          <button class="primary-button" id="spin-button" type="button">
+            <svg class="button-spin-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M20 7v5h-5M4 17v-5h5M18.5 9A7 7 0 0 0 6.2 6.2L4 9M5.5 15A7 7 0 0 0 17.8 17.8L20 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span id="spin-button-label">Faire tourner la roue</span>
+            <svg class="button-arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M5 12h14M14 7l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <p class="random-note">
+            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m5 8 2 2 4-4M3 4l7-2 7 2v5c0 4.5-2.7 7.5-7 9-4.3-1.5-7-4.5-7-9V4Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Chaque plat a exactement la même chance
+          </p>
+        </div>
+
+        <div class="option-card">
+          <div class="option-main">
+            <div class="option-copy">
+              <label for="no-repeat">Sans répétition</label>
+              <p>Chaque plat ne revient qu’après un tour complet.</p>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="no-repeat" aria-label="Activer le mode sans répétition">
+              <span class="switch-track"><span class="switch-thumb"></span></span>
+            </label>
+          </div>
+          <div class="option-footer">
+            <span id="remaining-text">Tous les plats participent</span>
+            <button id="reset-cycle" type="button" disabled>
+              <svg viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M15 5v4h-4M3 13V9h4M13.8 6.5A5.5 5.5 0 0 0 4.4 4.4L3 6M4.2 11.5a5.5 5.5 0 0 0 9.4 2.1L15 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Réinitialiser
+            </button>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="lower-grid">
+      <div class="dishes-section" id="plats">
+        <div class="section-heading">
+          <div>
+            <span class="section-eyebrow">AU MENU</span>
+            <h2>Les plats dans la roue</h2>
+          </div>
+          <span class="count-badge">23 saveurs</span>
+        </div>
+        <div class="dish-list" id="dish-list"></div>
+      </div>
+
+      <div class="history-section" id="historique">
+        <div class="section-heading history-heading">
+          <div>
+            <span class="section-eyebrow">LES DERNIERS TIRAGES</span>
+            <h2>Pour se souvenir</h2>
+          </div>
+          <button class="clear-history" id="clear-history" type="button" hidden>Effacer</button>
+        </div>
+        <div class="history-list" id="history-list"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span aria-hidden="true">✦</span> Bon appétit &amp; que le hasard soit avec toi. <span aria-hidden="true">✦</span>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

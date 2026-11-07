@@ -1,0 +1,28 @@
+{
+  "id": "./",
+  "name": "La roue des saveurs",
+  "short_name": "Les saveurs",
+  "description": "Une roulette gourmande pour choisir aléatoirement le plat du jour parmi 23 spécialités.",
+  "lang": "fr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#f7f3ea",
+  "theme_color": "#f7f3ea",
+  "categories": ["food", "lifestyle", "utilities"],
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
